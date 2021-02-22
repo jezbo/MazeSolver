@@ -1,5 +1,3 @@
-
-const { move } = require('./move');
 const clonedeep = require('lodash.clonedeep');
 
 exports.verifyMap = (map, start, success, passableTiles) => {
