@@ -1,8 +1,34 @@
-const { findMapSize } = require('./findMapSize');
+
 const { move } = require('./move');
 const clonedeep = require('lodash.clonedeep');
 
 exports.verifyMap = (map, start, success, passableTiles) => {
+    const findMapSize = (mapArray) => {
+        return {
+            y:mapArray.length,
+            x:mapArray.map(e => e.length)
+        };
+    }
+    
+    const move = (mapArray, startingPosition, yMove, xMove) => {
+    const mapSize = findMapSize(mapArray);
+    if(
+        startingPosition.y+yMove<mapSize.y 
+        && 
+        startingPosition.x+xMove<mapSize.x[startingPosition.y]
+        &&
+        startingPosition.y+yMove>=0
+        &&
+        startingPosition.x+xMove>=0
+    ){
+        return {
+            y:(startingPosition.y + yMove), 
+            x:(startingPosition.x + xMove)
+        }    
+    }
+    else return false;
+}
+    
     const possibleMoves = [['u',-1,0],['d',1,0],['l',0,-1],['r',0,1]];
     const testMap = clonedeep(map);
     let verified = false;
